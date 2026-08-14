@@ -662,11 +662,12 @@
             font-weight: 800;
         }
 
+        /* ===== WALI KELAS DENGAN FOTO ===== */
         .homeroom-teacher {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 11px 18px;
+            gap: 14px;
+            padding: 11px 20px 11px 14px;
             margin-bottom: 22px;
             border-radius: 50px;
             background: linear-gradient(135deg, #ede9fe, #fce7f3);
@@ -683,16 +684,18 @@
             box-shadow: 0 12px 35px rgba(99, 102, 241, 0.15);
         }
 
-        .homeroom-teacher .teacher-icon {
-            width: 30px;
-            height: 30px;
+        .homeroom-teacher .teacher-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #6366f1;
+            flex-shrink: 0;
+            background: #ede9fe;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background: var(--gradient);
-            color: white;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
         }
 
         .homeroom-teacher strong {
@@ -880,7 +883,7 @@
         }
 
         /* ============================================================
-                   MEMBERS
+                   MEMBERS - Dengan Foto untuk Michael & Naufal
                    ============================================================ */
         .members {
             background: white;
@@ -937,6 +940,27 @@
             background: white;
             border-color: #c7d2fe;
             box-shadow: 0 15px 35px rgba(99, 102, 241, 0.12);
+        }
+
+        .member-avatar {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e5e7eb;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gray);
+            transition: 0.3s ease;
+        }
+
+        .member-card:hover .member-avatar {
+            border-color: #6366f1;
         }
 
         .member-number {
@@ -1522,10 +1546,13 @@
 
                     <div class="about-content reveal">
                         <h3>KAMI ADALAH KELAS X-9 INVICTUS YANG TERSOLID DAN TERBAIK</h3>
+                        
+                        <!-- WALI KELAS DENGAN FOTO -->
                         <div class="homeroom-teacher">
-                            <span class="teacher-icon">👨‍🏫</span>
+                            <img class="teacher-avatar" src="foto pw" alt="Wali Kelas" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=teacher-icon>👨‍🏫</span><span>Wali Kelas: <strong>Bapak Windi</strong></span>'">
                             <span>Wali Kelas: <strong>Bapak Windi</strong></span>
                         </div>
+
                         <p>
                             <span class="highlight">X-9 Invictus</span> adalah sebuah kelas yang terdiri dari berbagai
                             macam karakter, kepribadian, kemampuan, dan cerita. Walaupun setiap anggota memiliki
@@ -1760,56 +1787,61 @@
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        // --- MEMBERS DATA ---
+        // --- MEMBERS DATA dengan foto untuk Michael & Naufal ---
         const members = [
-            ["Vino", 1],
-            ["Amora", 2],
-            ["Cencen", 3],
-            ["Cathy", 4],
-            ["Callie", 5],
-            ["Cherry", 6],
-            ["Kaia", 7],
-            ["Louise", 8],
-            ["Flo", 9],
-            ["1Ratya", 10],
-            ["Geon", 11],
-            ["Joice", 12],
-            ["Josh", 13],
-            ["Ale", 14],
-            ["Kate", 15],
-            ["Keiko", 16],
-            ["Ken", 17],
-            ["Pelangi", 18],
-            ["Marvel", 19],
-            ["Matthew", 20],
-            ["Melona", 21],
-            ["Michael", 22],
-            ["Tata", 23],
-            ["Naufal", 24],
-            ["Nema", 25],
-            ["Nolan", 26],
-            ["Quin", 27],
-            ["Raphael", 28],
-            ["Revan", 29],
-            ["Rifka", 30],
-            ["Kenny", 31],
-            ["Steffi", 32],
-            ["Tegar", 33],
-            ["Xylon", 34],
-            ["Erine", 35],
-            ["Laura", 36]
+            ["Vino", 1, ""],
+            ["Amora", 2, ""],
+            ["Cencen", 3, ""],
+            ["Cathy", 4, ""],
+            ["Callie", 5, ""],
+            ["Cherry", 6, ""],
+            ["Kaia", 7, ""],
+            ["Louise", 8, ""],
+            ["Flo", 9, ""],
+            ["1Ratya", 10, ""],
+            ["Geon", 11, ""],
+            ["Joice", 12, ""],
+            ["Josh", 13, ""],
+            ["Ale", 14, ""],
+            ["Kate", 15, ""],
+            ["Keiko", 16, ""],
+            ["Ken", 17, ""],
+            ["Pelangi", 18, ""],
+            ["Marvel", 19, ""],
+            ["Matthew", 20, ""],
+            ["Melona", 21, ""],
+            ["Michael", 22, "foto m"],
+            ["Tata", 23, ""],
+            ["Naufal", 24, "foto n"],
+            ["Nema", 25, ""],
+            ["Nolan", 26, ""],
+            ["Quin", 27, ""],
+            ["Raphael", 28, ""],
+            ["Revan", 29, ""],
+            ["Rifka", 30, ""],
+            ["Kenny", 31, ""],
+            ["Steffi", 32, ""],
+            ["Tegar", 33, ""],
+            ["Xylon", 34, ""],
+            ["Erine", 35, ""],
+            ["Laura", 36, ""]
         ];
 
         const grid = document.getElementById('membersGrid');
-        grid.innerHTML = members.map(m =>
-            `<div class="member-card reveal">
-                    <div class="member-number">${String(m[1]).padStart(2, '0')}</div>
-                    <div class="member-info">
-                        <h3>${m[0]}</h3>
-                        <span>Member #${m[1]}</span>
-                    </div>
-                </div>`
-        ).join('');
+        grid.innerHTML = members.map(m => {
+            const hasFoto = m[2] && m[2].length > 0;
+            const avatarHtml = hasFoto 
+                ? `<img class="member-avatar" src="${m[2]}" alt="${m[0]}" onerror="this.style.display='none'; this.outerHTML='<div class=member-avatar style=display:flex;>${m[0][0]}</div>'">`
+                : `<div class="member-avatar" style="display:flex;">${m[0][0]}</div>`;
+            return `<div class="member-card reveal">
+                        ${avatarHtml}
+                        <div class="member-number">${String(m[1]).padStart(2, '0')}</div>
+                        <div class="member-info">
+                            <h3>${m[0]}</h3>
+                            <span>Member #${m[1]}</span>
+                        </div>
+                    </div>`;
+        }).join('');
 
         // --- NAVBAR SCROLL ---
         const navbar = document.getElementById('navbar');
