@@ -114,6 +114,10 @@
             color: white;
             font-weight: 800;
             font-size: 1.25rem;
+            transition: 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.02);
         }
 
         .logo-icon {
@@ -175,6 +179,10 @@
             color: white;
             font-size: 1.8rem;
             cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .menu-toggle:hover {
+            transform: rotate(90deg);
         }
 
         /* ============================================================
@@ -190,7 +198,6 @@
             background: #080d1c;
         }
 
-        /* Background foto dengan overlay gelap */
         .hero-bg-image {
             position: absolute;
             inset: 0;
@@ -245,6 +252,7 @@
             font-weight: 700;
             margin-bottom: 25px;
             backdrop-filter: blur(10px);
+            animation: fade-up 1s ease forwards;
         }
 
         .badge-dot {
@@ -356,7 +364,6 @@
             transform: translateY(-4px) scale(1.02);
         }
 
-        /* ---- hero card ---- */
         .hero-card-wrapper {
             position: relative;
             animation: float 6s ease-in-out infinite;
@@ -523,7 +530,7 @@
         }
 
         /* ============================================================
-                   ABOUT - Efek zoom saat scroll
+                   ABOUT
                    ============================================================ */
         .about {
             background: white;
@@ -684,7 +691,7 @@
             box-shadow: 0 12px 35px rgba(99, 102, 241, 0.15);
         }
 
-        .homeroom-teacher .teacher-avatar {
+        .teacher-avatar {
             width: 42px;
             height: 42px;
             border-radius: 50%;
@@ -883,7 +890,7 @@
         }
 
         /* ============================================================
-                   MEMBERS - Dengan Foto untuk Michael & Naufal
+                   MEMBERS
                    ============================================================ */
         .members {
             background: white;
@@ -933,6 +940,7 @@
             align-items: center;
             gap: 15px;
             transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: default;
         }
 
         .member-card:hover {
@@ -1481,7 +1489,6 @@
     <!-- ==================== HERO ==================== -->
     <main>
         <section class="hero" id="home">
-            <!-- Background foto -->
             <div class="hero-bg-image"></div>
 
             <div class="hero-container">
@@ -1546,10 +1553,10 @@
 
                     <div class="about-content reveal">
                         <h3>KAMI ADALAH KELAS X-9 INVICTUS YANG TERSOLID DAN TERBAIK</h3>
-                        
+
                         <!-- WALI KELAS DENGAN FOTO -->
                         <div class="homeroom-teacher">
-                            <img class="teacher-avatar" src="foto pw" alt="Wali Kelas" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=teacher-icon>👨‍🏫</span><span>Wali Kelas: <strong>Bapak Windi</strong></span>'">
+                            <img class="teacher-avatar" src="foto pw" alt="Wali Kelas" onerror="this.outerHTML='<span class=teacher-avatar style=display:flex;background:linear-gradient(135deg,#ede9fe,#fce7f3);font-size:1.2rem;>👨‍🏫</span>'">
                             <span>Wali Kelas: <strong>Bapak Windi</strong></span>
                         </div>
 
@@ -1830,17 +1837,17 @@
         const grid = document.getElementById('membersGrid');
         grid.innerHTML = members.map(m => {
             const hasFoto = m[2] && m[2].length > 0;
-            const avatarHtml = hasFoto 
-                ? `<img class="member-avatar" src="${m[2]}" alt="${m[0]}" onerror="this.style.display='none'; this.outerHTML='<div class=member-avatar style=display:flex;>${m[0][0]}</div>'">`
-                : `<div class="member-avatar" style="display:flex;">${m[0][0]}</div>`;
+            const avatarHtml = hasFoto ?
+                `<img class="member-avatar" src="${m[2]}" alt="${m[0]}" onerror="this.outerHTML='<div class=member-avatar style=display:flex;background:#f1f5f9;color:#64748b;font-weight:700;>${m[0][0]}</div>'">` :
+                `<div class="member-avatar" style="display:flex;background:#f1f5f9;color:#64748b;font-weight:700;">${m[0][0]}</div>`;
             return `<div class="member-card reveal">
-                        ${avatarHtml}
-                        <div class="member-number">${String(m[1]).padStart(2, '0')}</div>
-                        <div class="member-info">
-                            <h3>${m[0]}</h3>
-                            <span>Member #${m[1]}</span>
-                        </div>
-                    </div>`;
+                            ${avatarHtml}
+                            <div class="member-number">${String(m[1]).padStart(2, '0')}</div>
+                            <div class="member-info">
+                                <h3>${m[0]}</h3>
+                                <span>Member #${m[1]}</span>
+                            </div>
+                        </div>`;
         }).join('');
 
         // --- NAVBAR SCROLL ---
@@ -1872,7 +1879,7 @@
         }, { threshold: 0.12 });
         reveals.forEach(el => observer.observe(el));
 
-        // --- ZOOM EFFECT ON ABOUT CARD (membesar saat scroll) ---
+        // --- ZOOM EFFECT ON ABOUT CARD ---
         const aboutCard = document.getElementById('aboutCard');
         const aboutObserver = new IntersectionObserver(entries => {
             entries.forEach(e => {
